@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/game_company.css') }}">
+</head>
+
+<body>
+    <h1>Welcome to Game-Tier</h1>
+    <h3>Select a company to start reviewing their games.</h3>
+    <div class="game_companies">{{ allCompanies }}</div>
+</body>
