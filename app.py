@@ -47,6 +47,34 @@ def home():
     mySll.addFirst("Electronic Arts")
     mySll.addFirst("Activision Blizzard")
     mySll.addFirst("Epic Games")
+    mySll.addFirst("Rockstar Games")
+    mySll.addFirst("Ubisoft")
+    mySll.addFirst("Bandai Namco")
+    mySll.addFirst("Microsoft")
+    mySll.addFirst("Sony")
+    mySll.addFirst("Valve Corporation")
+    mySll.addFirst("Sega Games Co. Ltd")
+    mySll.addFirst("Naughty Dog Inc")
+    mySll.addFirst("Infinity Ward")
+    mySll.addFirst("Take-Two Interactive Software Inc")
+    mySll.addFirst("Gameloft")
+    mySll.addFirst("ZeniMax Media Inc")
+    mySll.addFirst("Retro Studios")
+    mySll.addFirst("Level-5 Company")
+    mySll.addFirst("PopCap Games")
+    mySll.addFirst("Treasure Co. Ltd")
+    mySll.addFirst("Capcom Company Ltd")
+    mySll.addFirst("Bungie Inc")
+    mySll.addFirst("Insomniac Games Inc")
+    mySll.addFirst("NCSOFT")
+    mySll.addFirst("Bethesda Game Studios")
+    mySll.addFirst("Sonic Team")
+    mySll.addFirst("LucasArts")
+    mySll.addFirst("Blizzard Entertainment Inc")
+    mySll.addFirst("Konami Holdings Corporations")
+    mySll.addFirst("id Software")
+    mySll.addFirst("BioWare")
+    mySll.addFirst("Nexon Co. Ltd")
 
     allCompanies = ""
 
@@ -54,7 +82,7 @@ def home():
         allCompanies += mySll.head.data + "\n"
         mySll.head = mySll.head.next
 
-    return render_template("game_company.html", allCompanies=allCompanies)
+    return render_template("game_company.html",  allCompanies=allCompanies)
 
 #mojang
 @app.route('/mojang')
@@ -121,6 +149,11 @@ def electronic_arts():
 @app.route('/activision_blizzard')
 def activision_bilizzard():
     return "Activision Blizzard tier list"
+
+#Microsoft
+@app.route('/microsoft')
+def microsoft():
+    return "Microsoft tier list here"
 
 #User page to suggest a game to me.
 @app.route('/suggest_game')

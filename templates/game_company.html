@@ -2,10 +2,11 @@
 
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/game_company.css') }}">
+    <script src="{{ url_for ('static', filename='scripts/game_company.js') }}" defer></script>
 </head>
 
 <body>
     <h1>Welcome to Game-Tier</h1>
     <h3>Select a company to start reviewing their games.</h3>
-    <div class="game_companies">{{ allCompanies }}</div>
+    <h2><div class="game_companies">{{ allCompanies }}</div></h2>
 </body>

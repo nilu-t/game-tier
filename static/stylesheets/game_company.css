@@ -1,3 +1,33 @@
+/* Global styles.
+ * ---------------------------------------------------------------------------------------
+ */
+
+body{
+    background-color: #262b2f;
+}
+
+h1{
+    color: blanchedalmond;
+    text-align: center;
+}
+h3{
+    color: whitesmoke;
+}
+a{
+    display: inline-flex;
+    margin-right: 1rem; /* outer spacing for right of each <a> element.*/
+    margin-bottom: 1rem; /* outer bottom spacing for each <a> element.*/
+    text-decoration: none;
+    color: #878d91;
+    border: 3px ridge aliceblue;
+    border-radius: 20px;
+    padding: 10px; /* innner spacing inside the anchor element. left,right,top and bottom padding is 10px. */
+}
+
+/* Class and ID selector styles.
+ * ---------------------------------------------------------------------------------------
+ */
 .game_companies{
-    white-space: pre-wrap;
+    height: 100vh;
+    width: 50vw;
 }
