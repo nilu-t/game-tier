@@ -31,7 +31,6 @@ class sll:
             #now that the last element is found, its next node is the new node to be created.
             newNode = node(data)
             currNode.next = newNode
-
     
     def sortAlphaAscend(self, head=None):
         '''applying merge sort on the singly linked list to sort all the nodes alphabetically ascending in O(n*logn) time'''
@@ -74,14 +73,17 @@ class sll:
                 tail.next = right
                 right = right.next #iterate the right node.
             else:
+                #right node should come after the left node.
                 tail.next = left
                 left = left.next #iterate the left node.
             
             tail = tail.next #iterate the tail node so it always points to its tail.
-            
+        
+        #it's possible that the left list is not null and the right list is null. In that case, the tail appends the remaining left list.
         if left != None:
             tail.next = left
         
+        #it's possible that the right list is not null and the left list is null. In that case, the tail appends the remaining right list.
         if right != None:
             tail.next = right
         
@@ -242,7 +244,6 @@ def mojang():
         mySll.head = mySll.head.next
 
     return render_template("games.html", company=company, allGames=allGames)  
-
 
 #nintendo
 @app.route('/nintendo')

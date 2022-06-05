@@ -10,28 +10,29 @@ h1, h1 b{
     text-align: center;
     font-family:'Courier New', Courier, monospace;
     text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
-
 }
 h1 b{
-    text-shadow: 0px 2px hotpink, 0px -2px aqua;
+    text-shadow: 0px 3px 1px hotpink, 0px -3px 1px aqua;
+    font-size: 250%;
 }
 h3{
     color: whitesmoke;
     margin-left: 1rem; 
-    text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
 }
 a{
     display: inline-block; /* each anchor elements sit next to each other. Margins are respected. */
     margin-right: 1rem; /* outer spacing for right of each <a> element.*/
     margin-bottom: 1rem; /* outer bottom spacing for each <a> element.*/
     text-decoration: none;
-    color: lightblue;
-    border: 3px ridge aliceblue;
+    border: 5px ridge black;
     border-radius: 20px;
     padding: 10px; /* innner spacing inside the anchor element. left,right,top and bottom padding is 10px. */
-    font-size: x-large;
+    font-size: xx-large;
     font-family:'American typewriter','Courier New', Courier, monospace;
-    text-shadow: 0px 0.6px 0.5px hotpink, 0px -0.6px 0.5px aqua;
+
+    background-repeat: no-repeat;
+    color:aliceblue;
+    text-shadow: 0px 1.5px 3px black,1.5px 0px 3px black, 2.5px 0px 2px black; /* multiple text shadow to create a nice black border around text*/
 }
 
 /* Class and ID selector styles.
@@ -47,47 +48,130 @@ a{
     white-space: pre-wrap;
     margin-left: 1rem;
 }
-
 .sort_options{
     flex:1;
+    margin-left: 1rem;
     align-self: flex-start;
 }
-
 .sort_options button{
     background-color: transparent;
+    background-image: linear-gradient(90deg,#0080ff, #003569);
+    background-repeat: no-repeat;
     display: block;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     border-radius: 15px;
     padding: 1em;
 }
-
 .sort_options button{
     text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
 }
-
 .sort_options button:hover{
     cursor: pointer;
 }
-
 .sort_options ul{
     list-style: none;
 }
-
 .sort_options ul li{
     font-size: x-large;
     color: whitesmoke;
     text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
 
 }
-
 .sort_options .sort_item{
     color: honeydew;
     font-family: Didot;
 
 }
-
-.sort_options .sort_title{
+.sort_title{
+    color:aliceblue;
     text-decoration: underline;
     text-underline-position: under; /* increased gap for underline */
+}
+
+
+/** 
+* Attribute selectors
+* For each of the companies, creating a gradient background using their logo.
+------------------------------------------------------------------------------------------
+*/
+a[href="/bandai_namco"], a[href="/electronic_arts"]{
+    background-image: linear-gradient(90deg,yellow,orange,darkorange,red);
+}
+a[href="/mojang"]{
+    background-image: linear-gradient(90deg,red, red, darkred);
+}
+a[href="/popcap_games"]{
+    background-color: #ed1c24;
+}
+a[href="/ubisoft"], a[href="/sony"], a[href="/bethesda_game_studios"],
+a[href="/gameloft"], a[href="/zenimax_media"], a[href="/bioware"], a[href="/id_software"]
+{
+    background-color: black;
+}
+a[href="/epic_games"]{
+    background-color: #1d1c1d;
+}
+a[href="/rockstar_games"]{
+    background-image: linear-gradient(90deg,#040301, #040301, #ffab00,#fff);
+}
+a[href="/nintendo"]{
+    background-image: linear-gradient(90deg,#e60012, #fff);
+}
+a[href="/valve_corporation"]{
+    background-color: #f74843;
+}
+a[href="/infinity_ward"]{
+    background-image: linear-gradient(90deg,red, black);
+}
+a[href="/naughty_dog"]{
+    background-image: linear-gradient(90deg,#231f20, #fd0000);
+}
+a[href="/activision_blizzard"]{
+    background-image: linear-gradient(90deg,black,black, gray, lightblue);
+}
+a[href="/microsoft"]{
+    background-image: linear-gradient(90deg,#f65314,#f65314,#7fbb41, #7fbb41,#00a1f1,#00a1f1,#fb0, #fb0);
+}
+a[href="/sega_games"]{
+    background-image: linear-gradient(90deg,darkblue, white);
+}
+a[href="/take_two_interactive_software"]{
+    background-image: linear-gradient(90deg,blue, black);
+}
+a[href="/retro_studios"]{
+    background-image: linear-gradient(90deg,#5b6580,#8a97b7,#343a49,#20242d);
+}
+a[href="/level5"]{
+    background-image: linear-gradient(90deg,#5b6580,black);
+}
+a[href="/treasure"]{
+    background-image: linear-gradient(90deg,yellow,orange,darkorange);
+}
+a[href="/capcom_company"]{
+    background-image: linear-gradient(90deg,#2A2A72,#009FFD, yellow);
+}
+a[href="/ncsoft"]{
+    background-image: linear-gradient(90deg,#004C98, #003569);
+}
+a[href="/konami_holdings_corporations"]{
+    background-color: #990014;
+}
+a[href="/nexon"]{
+    background-image: linear-gradient(90deg,#0b2a4a, #c3d600, #00a1e1);
+}
+a[href="/bungie"]{
+    background-image: linear-gradient(90deg,#bbbdbf,#00a3e3);
+}
+a[href="/blizzard_entertainment"]{
+    background-image: linear-gradient(90deg,#00b4ff, black);
+}
+a[href="/insomniac_games"]{
+    background-image: linear-gradient(90deg,#78b1bb, black);
+}
+a[href="/sonic_team"]{
+    background-color: royalblue;
+}
+a[href="/lucasarts"]{
+    background-image: linear-gradient(90deg,yellow, orange, black);
 }

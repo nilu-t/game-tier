@@ -3,7 +3,7 @@ document.querySelector(".game_companies").innerHTML = ""; //clearing out anythin
 allCompanies = allCompanies.split("\n"); //array of split strings now returned.
 
 console.log(allCompanies)
-const body = document.querySelector(".game_companies"); 
+const gameDiv = document.querySelector(".game_companies"); 
 
 for(let i = 0; i < allCompanies.length; i++){
     const anchor = document.createElement("a"); //creating an anchor element.
@@ -128,7 +128,7 @@ for(let i = 0; i < allCompanies.length; i++){
             break;
 
         case "Bungie Inc":
-            anchor.setAttribute("href", "/bungie_inc");
+            anchor.setAttribute("href", "/bungie");
             anchor.innerHTML = "Bungie Inc";
             break;
 
@@ -187,7 +187,7 @@ for(let i = 0; i < allCompanies.length; i++){
     }//end of switch statement.
 
     anchor.setAttribute("draggable", "false"); //for each of the anchors made, the element cannot be dragged.
-    body.append(anchor);
+    gameDiv.append(anchor);
 
 
 } //end of for-loop
