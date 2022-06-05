@@ -1,9 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__) #defining the Flask app.
 
 class node:
-    def __init__(self, data, next=None):
+    def __init__(self, data=None, next=None):
         '''constructor for the node'''
         self.data = data
         self.next = next
@@ -32,14 +32,125 @@ class sll:
             newNode = node(data)
             currNode.next = newNode
 
-    def reverse():
+    
+    def sortAlphaAscend(self, head=None):
+        '''applying merge sort on the singly linked list to sort all the nodes alphabetically ascending in O(n*logn) time'''
+
+        #base case when there are no nodes or there is 1 node, then the head is returned.
+        if (head == None or head.next == None):
+            return head
+        
+        #splitting the head into left and right partitions.
+        leftPartition = head #initially the left partition is just the SLL itself.
+        rightPartition = self.getMid(head) #intitally the right partition is just the middle node SLL.
+        tempRight = rightPartition.next #the right partition is always after the middle node.
+        rightPartition.next = None #The left partition is now finished. Since rightPartition aliases the head, then leftPartition changes.
+        rightPartition = tempRight #restoring the right partition.
+
+        leftPartition = self.sortAlphaAscend(leftPartition)  #recursively break down and sort the left half of the list.
+        rightPartition = self.sortAlphaAscend(rightPartition) #recursively break down and sort the right half of the list.
+
+        return self.mergeAlphaAscend(leftPartition, rightPartition) #the sorted list is the merging of the left and right halves of the list.
+
+    def mergeAlphaAscend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (ALPHABETICALLY ASCENDING)'''
+        tail = node()
+        tailCopy = tail #tail copy which points to the head of the tail node.
+
+        #iterating the left and right SLL lists until one or both of the lists are null and addding them to tail based on alphabetical order.
+        while(left != None and right != None):
+
+            #getting first strings from the left and right SLL lists.
+            leftStr = (left.data)
+            rightStr = (right.data)
+
+            #comparing both the leftStr and rightStr objects to be lowercase, regardless if they were initially uppercase.
+            leftStr =  leftStr.lower()
+            rightStr = rightStr.lower()
+
+            #updating the tail SLL.
+            if (leftStr >= rightStr):
+                #right node should come before the left node.
+                tail.next = right
+                right = right.next #iterate the right node.
+            else:
+                tail.next = left
+                left = left.next #iterate the left node.
+            
+            tail = tail.next #iterate the tail node so it always points to its tail.
+            
+        if left != None:
+            tail.next = left
+        
+        if right != None:
+            tail.next = right
+        
+        return tailCopy.next
+
+    def sortAlphaDescend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes alphabetically descending in O(n*logn) time'''
+    
+        pass
+
+    def sortPopularAscend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes by most popularity ascending in O(n*logn) time'''
+
+        pass
+
+    def sortPopularDescend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes by most popularity descending in O(n*logn) time'''
+
+        pass
+
+    def sortCompanyFoundAscend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes by company founded ascending in O(n*logn) time'''
+
+        pass
+
+    def sortCompanyFoundDescend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes by company founded descending in O(n*logn) time'''
+
+        pass
+
+    def mergeAlphaDescend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (ALPHABETICALLY ASCENDING)'''
+        pass
+
+    def mergePopularDescend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (POPULARITY DESCENDING)'''
+        pass
+
+    def mergePopularAscend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (POPULARITY ASCENDING)'''
+        pass
+
+    def mergeCompanyFoundDescend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (COMPANY FOUND DESCENDING)'''
+        pass
+
+    def mergeCompanyFoundAscend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (COMPANY FOUND ASCENDING)'''
+        pass
+
+    def reverse(self):
         '''reverses the singly linked list.'''
         pass
 
-#home page.
-@app.route('/')
-def home():
+    def getMid(self, head):
+        ''' helper function for the merge sort. '''
+        slow = head #initially the slow pointer is just the head.
+        fast = head.next #initially the fast pointer is one iteration ahead of the slow pointer.
 
+        while (fast != None and fast.next != None):
+            slow = slow.next #slow pointer has iteration incremented by 1.
+            fast = fast.next.next #fast pointer is always 2 iterations ahead of the slow pointer.
+        
+        #when the fast pointer is NULL or its next node is none, then slow has reached the middle of the given head.
+        return slow
+
+#home page.
+@app.route('/', methods=['GET','POST'])
+def home():
     #creating the individual companies.
     mySll = sll()
     mySll.addFirst("Mojang")
@@ -78,10 +189,36 @@ def home():
 
     allCompanies = ""
 
-    while(mySll.head != None):
-        allCompanies += mySll.head.data + "\n"
-        mySll.head = mySll.head.next
+    if (request.method == 'POST'):
+        sortedHead = mySll.sortAlphaAscend(mySll.head)
 
+        while(sortedHead != None):
+            allCompanies += sortedHead.data + "\n"
+            sortedHead = sortedHead.next
+
+        if("alpha_ascend" in request.form):
+            return redirect(url_for('sorted', allCompanies=allCompanies))
+        elif("alpha_descend" in request.form):
+            return "alpha_descend"
+        elif("company_found_descend" in request.form):
+            return "company_found_descend"
+        elif("company_found_ascend" in request.form):
+            return "company_found_ascend"
+        elif("popular_ascend" in request.form):
+            return "popular_ascend"
+        elif("popular_descend" in request.form):
+            return "popular_descend"
+
+    if (request.method == 'GET'):
+        while(mySll.head != None):
+            allCompanies += mySll.head.data + "\n"
+            mySll.head = mySll.head.next
+        return render_template("game_company.html",  allCompanies=allCompanies)
+
+#page for "sorting". String converter is specified to filter it from the URL. This page is mainly due to creating a new state. So, when the page is refreshed there will be no "confirm resubmission of form" dialog. 
+@app.route('/sorted/<string:allCompanies>')
+def sorted(allCompanies):
+    print(allCompanies)
     return render_template("game_company.html",  allCompanies=allCompanies)
 
 #mojang
@@ -114,7 +251,7 @@ def nintendo():
     #creating the individual sub-game nodes for the nintendo singly linked list.
     mySll = sll()
     mySll.addFirst("Mario ")
-    mySll.addFirst("Pokémon")
+    mySll.addFirst("Pokemon")
     mySll.addFirst("The legend of Zelda")
 
     allGames = ""
@@ -130,10 +267,10 @@ def nintendo():
 def nintendo_mario():
     return "mario games"
 
-#nintendo -> pokémon games.
+#nintendo -> pokemon games.
 @app.route('/nintendo/pokemon')
 def nintendo_pokemon():
-    return "pokémon games"
+    return "pokemon games"
 
 #nintendo -> zelda games.
 @app.route('/nintendo/zelda')
@@ -147,7 +284,7 @@ def electronic_arts():
 
 #Activision Blizzard
 @app.route('/activision_blizzard')
-def activision_bilizzard():
+def activision_blizzard():
     return "Activision Blizzard tier list"
 
 #Microsoft

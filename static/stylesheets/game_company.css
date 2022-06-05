@@ -1,33 +1,93 @@
 /* Global styles.
  * ---------------------------------------------------------------------------------------
  */
-
 body{
     background-color: #262b2f;
 }
 
-h1{
-    color: blanchedalmond;
+h1, h1 b{
+    color: honeydew;
     text-align: center;
+    font-family:'Courier New', Courier, monospace;
+    text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
+
+}
+h1 b{
+    text-shadow: 0px 2px hotpink, 0px -2px aqua;
 }
 h3{
     color: whitesmoke;
+    margin-left: 1rem; 
+    text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
 }
 a{
-    display: inline-flex;
+    display: inline-block; /* each anchor elements sit next to each other. Margins are respected. */
     margin-right: 1rem; /* outer spacing for right of each <a> element.*/
     margin-bottom: 1rem; /* outer bottom spacing for each <a> element.*/
     text-decoration: none;
-    color: #878d91;
+    color: lightblue;
     border: 3px ridge aliceblue;
     border-radius: 20px;
     padding: 10px; /* innner spacing inside the anchor element. left,right,top and bottom padding is 10px. */
+    font-size: x-large;
+    font-family:'American typewriter','Courier New', Courier, monospace;
+    text-shadow: 0px 0.6px 0.5px hotpink, 0px -0.6px 0.5px aqua;
 }
 
 /* Class and ID selector styles.
  * ---------------------------------------------------------------------------------------
  */
-.game_companies{
+.home{
+    display: flex; /* by default flex direction will already be row.*/
     height: 100vh;
-    width: 50vw;
+    width: 100vw;
+}
+.game_companies{
+    flex:2;
+    white-space: pre-wrap;
+    margin-left: 1rem;
+}
+
+.sort_options{
+    flex:1;
+    align-self: flex-start;
+}
+
+.sort_options button{
+    background-color: transparent;
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 15px;
+    padding: 1em;
+}
+
+.sort_options button{
+    text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
+}
+
+.sort_options button:hover{
+    cursor: pointer;
+}
+
+.sort_options ul{
+    list-style: none;
+}
+
+.sort_options ul li{
+    font-size: x-large;
+    color: whitesmoke;
+    text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
+
+}
+
+.sort_options .sort_item{
+    color: honeydew;
+    font-family: Didot;
+
+}
+
+.sort_options .sort_title{
+    text-decoration: underline;
+    text-underline-position: under; /* increased gap for underline */
 }

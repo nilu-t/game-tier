@@ -6,7 +6,27 @@
 </head>
 
 <body>
-    <h1>Welcome to Game-Tier</h1>
+    <h1>Welcome to <b>Game-Tier</b></h1>
     <h3>Select a company to start reviewing their games.</h3>
-    <h2><div class="game_companies">{{ allCompanies }}</div></h2>
+    <div class="home">
+
+        <div class="game_companies">{{ allCompanies }}</div>
+
+        <div class="sort_options">
+
+            <ul>
+                <h2><li class="sort_title">Sort companies</li></h2>
+                <form action="/" method="post">
+                    <!-- The names of each button are used in the post request for flask through "if (name in request.form) syntax. In which request.form is the multidict"-->
+                    <button type="submit" name="alpha_ascend"><li class="sort_item">alphabetically ascending</li></button>
+                    <button type="submit" name="alpha_descend"><li class="sort_item">alphabetically descending</li></button>
+                    <button type="submit" name="popular_ascend"><li class="sort_item">popularity ascending</li></button>
+                    <button type="submit" name="popular_descend"><li class="sort_item">popularity descending</li></button>
+                    <button type="submit" name="company_found_ascend"><li class="sort_item">company founded ascending</li></button>
+                    <button type="submit" name="company_found_descend"><li class="sort_item">company founded descending</li></button>
+                </form>
+            </ul>
+
+        </div>
+    </div>
 </body>

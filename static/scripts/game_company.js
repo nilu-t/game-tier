@@ -2,6 +2,7 @@ let allCompanies = document.querySelector(".game_companies").innerHTML; //storin
 document.querySelector(".game_companies").innerHTML = ""; //clearing out anything that was previously inside the .game_companies tag.
 allCompanies = allCompanies.split("\n"); //array of split strings now returned.
 
+console.log(allCompanies)
 const body = document.querySelector(".game_companies"); 
 
 for(let i = 0; i < allCompanies.length; i++){
@@ -122,62 +123,62 @@ for(let i = 0; i < allCompanies.length; i++){
             break;
 
         case "Capcom Company Ltd":
-            anchor.setAttribute("href", "capcom_company");
+            anchor.setAttribute("href", "/capcom_company");
             anchor.innerHTML = "Capcom Company Ltd";
             break;
 
         case "Bungie Inc":
-            anchor.setAttribute("href", "bungie_inc");
+            anchor.setAttribute("href", "/bungie_inc");
             anchor.innerHTML = "Bungie Inc";
             break;
 
         case "Insomniac Games Inc":
-            anchor.setAttribute("href", "insomniac_games");
+            anchor.setAttribute("href", "/insomniac_games");
             anchor.innerHTML = "Insomniac Games Inc";
             break;
         
         case "NCSOFT":
-            anchor.setAttribute("href", "ncsoft");
+            anchor.setAttribute("href", "/ncsoft");
             anchor.innerHTML = "NCSOFT";
             break;
         
         case "Bethesda Game Studios":
-            anchor.setAttribute("href", "bethesda_game_studios");
+            anchor.setAttribute("href", "/bethesda_game_studios");
             anchor.innerHTML = "Bethesda Game Studios";
             break;
 
         case "Sonic Team":
-            anchor.setAttribute("href", "sonic_team");
+            anchor.setAttribute("href", "/sonic_team");
             anchor.innerHTML = "Sonic Team";
             break;
         
         case "LucasArts":
-            anchor.setAttribute("href", "lucasarts");
+            anchor.setAttribute("href", "/lucasarts");
             anchor.innerHTML = "LucasArts";
             break;
 
         case "Blizzard Entertainment Inc":
-            anchor.setAttribute("href", "blizzard_entertainment");
+            anchor.setAttribute("href", "/blizzard_entertainment");
             anchor.innerHTML = "Blizzard Entertainment Inc";
             break;
 
         case "Konami Holdings Corporations":
-            anchor.setAttribute("href", "konami_holdings_corporations");
+            anchor.setAttribute("href", "/konami_holdings_corporations");
             anchor.innerHTML = "Konami Holdings Corporations";
             break;
         
         case "id Software":
-            anchor.setAttribute("href", "id_software");
+            anchor.setAttribute("href", "/id_software");
             anchor.innerHTML = "id Software";
             break;
 
         case "BioWare":
-            anchor.setAttribute("href", "bioware");
+            anchor.setAttribute("href", "/bioware");
             anchor.innerHTML = "BioWare";
             break;
 
         case "Nexon Co. Ltd":
-            anchor.setAttribute("href", "nexon");
+            anchor.setAttribute("href", "/nexon");
             anchor.innerHTML = "Nexon Co. Ltd";
             break;
 
