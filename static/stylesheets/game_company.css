@@ -112,83 +112,83 @@ hr{
 * For each of the companies, creating a gradient background using their logo.
 ------------------------------------------------------------------------------------------
 */
-a[href="/bandai_namco"], a[href="/electronic_arts"]{
+a[href="/Bandai Namco"], a[href="/Electronic Arts"]{
     background-image: linear-gradient(90deg,yellow,orange,darkorange,red);
 }
-a[href="/mojang"]{
+a[href="/Mojang"]{
     background-image: linear-gradient(90deg,red, red, darkred);
 }
-a[href="/popcap_games"]{
+a[href="/PopCap Games"]{
     background-color: #ed1c24;
 }
-a[href="/ubisoft"], a[href="/sony"], a[href="/bethesda_game_studios"],
-a[href="/gameloft"], a[href="/zenimax_media"], a[href="/bioware"], a[href="/id_software"]
+a[href="/Ubisoft"], a[href="/Sony"], a[href="/Bethesda Game Studios"],
+a[href="/Gameloft"], a[href="/ZeniMax Media Inc"], a[href="/BioWare"], a[href="/id Software"]
 {
     background-color: black;
 }
-a[href="/epic_games"]{
+a[href="/Epic Games"]{
     background-color: #1d1c1d;
 }
-a[href="/rockstar_games"]{
+a[href="/Rockstar Games"]{
     background-image: linear-gradient(90deg,#040301, #040301, #ffab00,#fff);
 }
-a[href="/nintendo"]{
+a[href="/Nintendo"]{
     background-image: linear-gradient(90deg,#e60012, #fff);
 }
-a[href="/valve_corporation"]{
+a[href="/Valve Corporation"]{
     background-color: #f74843;
 }
-a[href="/infinity_ward"]{
+a[href="/Infinity Ward"]{
     background-image: linear-gradient(90deg,red, black);
 }
-a[href="/naughty_dog"]{
+a[href="/Naughty Dog Inc"]{
     background-image: linear-gradient(90deg,#231f20, #fd0000);
 }
-a[href="/activision_blizzard"]{
+a[href="/Activision Blizzard"]{
     background-image: linear-gradient(90deg,black,black, gray, lightblue);
 }
-a[href="/microsoft"]{
+a[href="/Microsoft"]{
     background-image: linear-gradient(90deg,#f65314,#f65314,#f65314,#f65314,#7fbb41,#7fbb41,#7fbb41,#7fbb41,#00a1f1,#00a1f1,#00a1f1,#00a1f1,#fb0,#fb0,#fb0, #fb0);
 }
-a[href="/sega_games"]{
+a[href="/Sega Games Co. Ltd"]{
     background-image: linear-gradient(90deg,darkblue, white);
 }
-a[href="/take_two_interactive_software"]{
+a[href="/Take-Two Interactive Software Inc"]{
     background-image: linear-gradient(90deg,blue, black);
 }
-a[href="/retro_studios"]{
+a[href="/Retro Studios"]{
     background-image: linear-gradient(90deg,#5b6580,#8a97b7,#343a49,#20242d);
 }
-a[href="/level5"]{
+a[href="/Level-5 Company"]{
     background-image: linear-gradient(90deg,#5b6580,black);
 }
-a[href="/treasure"]{
+a[href="/Treasure Co. Ltd"]{
     background-image: linear-gradient(90deg,yellow,orange,darkorange);
 }
-a[href="/capcom_company"]{
+a[href="/Capcom Company Ltd"]{
     background-image: linear-gradient(90deg,#2A2A72,#009FFD, yellow);
 }
-a[href="/ncsoft"]{
+a[href="/NCSOFT"]{
     background-image: linear-gradient(90deg,#004C98, #003569);
 }
-a[href="/konami_holdings_corporations"]{
+a[href="/Konami Holdings Corporations"]{
     background-color: #990014;
 }
-a[href="/nexon"]{
+a[href="/Nexon Co. Ltd"]{
     background-image: linear-gradient(90deg,#0b2a4a, #c3d600, #00a1e1);
 }
-a[href="/bungie"]{
+a[href="/Bungie Inc"]{
     background-image: linear-gradient(90deg,#bbbdbf,#00a3e3);
 }
-a[href="/blizzard_entertainment"]{
+a[href="/Blizzard Entertainment Inc"]{
     background-image: linear-gradient(90deg,#00b4ff, black);
 }
-a[href="/insomniac_games"]{
+a[href="/Insomniac Games Inc"]{
     background-image: linear-gradient(90deg,#78b1bb, black);
 }
-a[href="/sonic_team"]{
+a[href="/Sonic Team"]{
     background-color: royalblue;
 }
-a[href="/lucasarts"]{
+a[href="/LucasArts"]{
     background-image: linear-gradient(90deg,yellow, orange, black);
 }
