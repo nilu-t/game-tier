@@ -148,7 +148,7 @@ a[href="/activision_blizzard"]{
     background-image: linear-gradient(90deg,black,black, gray, lightblue);
 }
 a[href="/microsoft"]{
-    background-image: linear-gradient(90deg,#f65314,#f65314,#7fbb41, #7fbb41,#00a1f1,#00a1f1,#fb0, #fb0);
+    background-image: linear-gradient(90deg,#f65314,#f65314,#f65314,#f65314,#7fbb41,#7fbb41,#7fbb41,#7fbb41,#00a1f1,#00a1f1,#00a1f1,#00a1f1,#fb0,#fb0,#fb0, #fb0);
 }
 a[href="/sega_games"]{
     background-image: linear-gradient(90deg,darkblue, white);

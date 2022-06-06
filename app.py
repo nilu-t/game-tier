@@ -1,3 +1,4 @@
+from contextlib import nullcontext
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__) #defining the Flask app.
@@ -91,8 +92,21 @@ class sll:
 
     def sortAlphaDescend(self, head):
         '''applying merge sort on the singly linked list to sort all the nodes alphabetically descending in O(n*logn) time'''
-    
-        pass
+
+        #base case if the head is empty or the head is one node only. In that case the head is returned.
+        if(head == None or head.next == None):
+            return head
+
+        left = head #left is initally the pointer to the head node.
+        right = self.getMid(head) #right is initially the pointer to the head node. 
+        tempRight = right.next #the right list is one node right of the middle node. 
+        right.next = None #the left partition occurs here. 
+        right = tempRight
+
+        left = self.sortAlphaDescend(left) #recursively break down and sort the left list.
+        right = self.sortAlphaDescend(right) #recursively break down and sort the right list.
+
+        return self.mergeAlphaDescend(left, right) #merge the left and right partitions. 
 
     def sortPopularAscend(self, head):
         '''applying merge sort on the singly linked list to sort all the nodes by most popularity ascending in O(n*logn) time'''
@@ -116,7 +130,35 @@ class sll:
 
     def mergeAlphaDescend(self, left, right):
         '''helper function for merging both left and right partitions of the list. (ALPHABETICALLY ASCENDING)'''
-        pass
+
+        tail = node("dummy") #tail node, used for populating the merged data.
+        tailCopy = tail #tailCopy node which points to the head of the tail node.
+
+        while(left != None and right != None):
+            
+            leftData = left.data
+            rightData = right.data
+
+            leftData = leftData.lower() #making the left data str to be lowercase.
+            rightData = rightData.lower() #making the right data str to be lowercase.
+
+            if(leftData > rightData):
+                tail.next = left #the left node should appear before the right node if the left data is greater.
+                left = left.next #iterate the left node. 
+            elif(leftData <= rightData):
+                tail.next = right #the right node should appear before the left node if the right data is greater.
+                right = right.next #iterate the right node.
+            
+            tail = tail.next #the tail MUST always be iterated in order to point to its tail.
+        
+        #the left list might not be null. In that case, the remaining left list is appended to the tail.
+        if(left != None):
+            tail.next = left
+        #the right list might not be null. In that case, the remaining right list appended to the tail.
+        if(right != None):
+            tail.next = right
+
+        return tailCopy.next
 
     def mergePopularDescend(self, left, right):
         '''helper function for merging both left and right partitions of the list. (POPULARITY DESCENDING)'''
@@ -192,16 +234,15 @@ def home():
     allCompanies = ""
 
     if (request.method == 'POST'):
-        sortedHead = mySll.sortAlphaAscend(mySll.head)
 
-        while(sortedHead != None):
-            allCompanies += sortedHead.data + "\n"
-            sortedHead = sortedHead.next
+        sortedHead = None
 
         if("alpha_ascend" in request.form):
-            return redirect(url_for('sorted', allCompanies=allCompanies))
+            sortedHead = mySll.sortAlphaAscend(mySll.head)
+
         elif("alpha_descend" in request.form):
-            return "alpha_descend"
+            sortedHead = mySll.sortAlphaDescend(mySll.head)
+
         elif("company_found_descend" in request.form):
             return "company_found_descend"
         elif("company_found_ascend" in request.form):
@@ -210,6 +251,13 @@ def home():
             return "popular_ascend"
         elif("popular_descend" in request.form):
             return "popular_descend"
+
+        #iterating through all the sorted node data then returning it in the GET redirect to sorted page.
+        while(sortedHead != None):
+            allCompanies += sortedHead.data + "\n"
+            sortedHead = sortedHead.next
+    
+        return redirect(url_for('sorted', allCompanies=allCompanies))
 
     if (request.method == 'GET'):
         while(mySll.head != None):
