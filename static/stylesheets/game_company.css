@@ -81,8 +81,6 @@ hr{
     margin-bottom: 3rem;
     border-radius: 15px;
     padding: 1em;
-}
-.sort_options button{
     text-shadow: 0px 1.2px 1px hotpink, 0px -1.2px 1px aqua;
 }
 .sort_options button:hover{
@@ -106,6 +104,14 @@ hr{
     color:aliceblue;
     text-decoration: underline;
     text-underline-position: under; /* increased gap for underline */
+}
+.sort_header{
+    color:aliceblue;
+    text-decoration: underline;
+    text-underline-position: under; /* increased gap for underline */
+    text-align: center;
+    font-size: 250%;
+    text-shadow: 0px 2.1px 0.5px hotpink, 0px -2.1px 0.5px aqua;
 }
 /** 
 * Attribute selectors

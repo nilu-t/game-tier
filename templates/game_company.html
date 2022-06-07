@@ -15,15 +15,20 @@
 
         <div class="sort_options">
             <ul>
-                <h2 class="sort_title">Sort companies</h2>
+                <h2 class="sort_header">Sort companies</h2> 
+
                 <form action="/" method="post">
+                    <h2 class="sort_title">alphabetically ascending</h2>
                     <!-- The names of each button are used in the post request for flask through "if (name in request.form) syntax. In which request.form is the multidict"-->
-                    <button type="submit" name="alpha_ascend"><li class="sort_item">alphabetically ascending</li></button>
-                    <button type="submit" name="alpha_descend"><li class="sort_item">alphabetically descending</li></button>
-                    <button type="submit" name="company_found_ascend"><li class="sort_item">company founded ascending</li></button>
-                    <button type="submit" name="company_found_descend"><li class="sort_item">company founded descending</li></button>
-                    <button type="submit" name="popular_ascend"><li class="sort_item">popularity ascending</li></button>
-                    <button type="submit" name="popular_descend"><li class="sort_item">popularity descending</li></button>
+                    <button type="submit" name="alpha_ascend"><li class="sort_item">company names</li></button>
+                    <button type="submit" name="company_found_ascend"><li class="sort_item">company founded</li></button>
+                    <button type="submit" name="country_produced_ascend"><li class="sort_item">country developed</li></button>
+                    <button type="submit" name="top_grossing_ascend"><li class="sort_item">top grossing game</li></button>
+                    <h2 class="sort_title">alphabetically descending</h2>
+                    <button type="submit" name="alpha_descend"><li class="sort_item">company names</li></button>
+                    <button type="submit" name="company_found_descend"><li class="sort_item">company founded</li></button>
+                    <button type="submit" name="country_produced_descend"><li class="sort_item">country developed</li></button>
+                    <button type="submit" name="top_grossing_descend"><li class="sort_item">top grossing game</li></button>
                 </form>
             </ul>
 

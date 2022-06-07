@@ -3,10 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__) #defining the Flask app.
 
 class node:
-    def __init__(self, data=None, companyFounded=None, next=None):
+    def __init__(self, data=None, companyFounded=None, country=None, next=None):
         '''constructor for the node'''
         self.data = data #data for the company names.
         self.next = next
+        self.country = country
         self.companyFounded = companyFounded
 
 class sll:
@@ -14,9 +15,9 @@ class sll:
         '''constructor for the singly linked list.'''
         self.head = head
 
-    def addFirst(self, data, companyFounded=None):
+    def addFirst(self, data, companyFounded=None, country=None):
         '''this function adds a node to the front of the linked list.'''
-        self.head = node(data, companyFounded, self.head) #adding the node to the front of the sll. 
+        self.head = node(data, companyFounded, country, self.head) #adding the node to the front of the sll. 
 
     def addLast(self, data):
         '''this function adds a node to the end of the linked list.'''
@@ -274,39 +275,39 @@ class sll:
 def home():
     #creating the individual companies.
     mySll = sll()
-    mySll.addFirst("Mojang", "05/2009")
-    mySll.addFirst("Nintendo", "09/1889")
-    mySll.addFirst("Electronic Arts", "05/1982")
-    mySll.addFirst("Activision Blizzard", "07/2008")
-    mySll.addFirst("Epic Games", "01/1991")
-    mySll.addFirst("Rockstar Games", "12/1998")
-    mySll.addFirst("Ubisoft", "03/1986")
-    mySll.addFirst("Bandai Namco", "03/2006")
-    mySll.addFirst("Microsoft", "04/1975")
-    mySll.addFirst("Sony", "05/1946")
-    mySll.addFirst("Valve Corporation","08/1996")
-    mySll.addFirst("Sega Games Co. Ltd", "06/1960")
-    mySll.addFirst("Naughty Dog Inc", "09/1984")
-    mySll.addFirst("Infinity Ward", "NA/2002")
-    mySll.addFirst("Take-Two Interactive Software Inc", "09/1993")
-    mySll.addFirst("Gameloft", "12/1999")
-    mySll.addFirst("ZeniMax Media Inc", "05/1999")
-    mySll.addFirst("Retro Studios", "09/1998")
-    mySll.addFirst("Level-5 Company", "10/1998")
-    mySll.addFirst("PopCap Games", "07/2000")
-    mySll.addFirst("Treasure Co. Ltd", "06/1992")
-    mySll.addFirst("Capcom Company Ltd", "05/1979")
-    mySll.addFirst("Bungie Inc", "05/1991")
-    mySll.addFirst("Insomniac Games Inc", "02/1994")
-    mySll.addFirst("NCSOFT", "03/1997")
-    mySll.addFirst("Bethesda Game Studios", "06/1986")
-    mySll.addFirst("Sonic Team", "NA/1991")
-    mySll.addFirst("LucasArts", "05/1982")
-    mySll.addFirst("Blizzard Entertainment Inc", "02/1991")
-    mySll.addFirst("Konami Holdings Corporations", "03/1969")
-    mySll.addFirst("id Software", "02/1991")
-    mySll.addFirst("BioWare", "02/1995")
-    mySll.addFirst("Nexon Co. Ltd", "12/1994")
+    mySll.addFirst("Mojang", "05/2009", "Sweden")
+    mySll.addFirst("Nintendo", "09/1889", "Japan")
+    mySll.addFirst("Electronic Arts", "05/1982", "U.S")
+    mySll.addFirst("Activision Blizzard", "07/2008", "U.S")
+    mySll.addFirst("Epic Games", "01/1991", "U.S")
+    mySll.addFirst("Rockstar Games", "12/1998", "U.S")
+    mySll.addFirst("Ubisoft", "03/1986", "France")
+    mySll.addFirst("Bandai Namco", "03/2006", "Japan")
+    mySll.addFirst("Microsoft", "04/1975", "U.S")
+    mySll.addFirst("Sony", "05/1946", "Japan")
+    mySll.addFirst("Valve Corporation","08/1996", "U.S")
+    mySll.addFirst("Sega Games Co. Ltd", "06/1960", "Japan")
+    mySll.addFirst("Naughty Dog Inc", "09/1984", "U.S")
+    mySll.addFirst("Infinity Ward", "NA/2002", "U.S")
+    mySll.addFirst("Take-Two Interactive Software Inc", "09/1993", "U.S")
+    mySll.addFirst("Gameloft", "12/1999", "France")
+    mySll.addFirst("ZeniMax Media Inc", "05/1999", "U.S")
+    mySll.addFirst("Retro Studios", "09/1998", "U.S")
+    mySll.addFirst("Level-5 Company", "10/1998", "Japan")
+    mySll.addFirst("PopCap Games", "07/2000", "U.S")
+    mySll.addFirst("Treasure Co. Ltd", "06/1992", "Japan")
+    mySll.addFirst("Capcom Company Ltd", "05/1979", "Japan")
+    mySll.addFirst("Bungie Inc", "05/1991", "U.S")
+    mySll.addFirst("Insomniac Games Inc", "02/1994", "U.S")
+    mySll.addFirst("NCSOFT", "03/1997", "South Korea")
+    mySll.addFirst("Bethesda Game Studios", "06/1986", "U.S")
+    mySll.addFirst("Sonic Team", "NA/1991", "Japan")
+    mySll.addFirst("LucasArts", "05/1982", "U.S")
+    mySll.addFirst("Blizzard Entertainment Inc", "02/1991", "U.S")
+    mySll.addFirst("Konami Holdings Corporations", "03/1969", "Japan")
+    mySll.addFirst("id Software", "02/1991", "U.S")
+    mySll.addFirst("BioWare", "02/1995", "Canada")
+    mySll.addFirst("Nexon Co. Ltd", "12/1994", "South Korea")
 
     allCompanies = ""
     allFounded = ""
@@ -343,11 +344,17 @@ def home():
         elif("company_found_descend" in request.form):
             return "company_found_descend"
 
-        elif("popular_ascend" in request.form):
-            return "popular_ascend"
+        elif("country_produced_descend" in request.form):
+            return "country_produced_descend"
 
-        elif("popular_descend" in request.form):
-            return "popular_descend"
+        elif("country_produced_ascend" in request.form):
+            return "country_produced_descend"
+
+        elif("top_grossing_descend" in request.form):
+            return "top_grossing_descend"
+        
+        elif("top_grossing_ascend" in request.form):
+            return "top_grossing_ascend"
 
         return redirect(url_for('sorted', allCompanies=allCompanies, allFounded=allFounded))
 

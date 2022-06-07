@@ -31,6 +31,5 @@ for(let i = 0; i < allCompanies.length; i++){
     anchor.setAttribute("id", currCompanyOrDate); //the anchor will have an id of the current company name.
     gameDiv.append(anchor);
 
-
 } //end of for-loop
 
