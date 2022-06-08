@@ -47,7 +47,7 @@ def home():
     mySll.addFirst("Rare", "NA/1985", "U.K")
 
     allCompanies = ""
-    allFounded = ""
+    extraContent = "" #stores additional content, such as dates founded, countries developed, etc. Each extra content will be wrapped in paranthesis.
 
     if (request.method == 'POST'):
 
@@ -75,22 +75,29 @@ def home():
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
                 allCompanies += sortedHead.data + ","
-                allFounded += sortedHead.companyFounded + ","
+                extraContent += "(" + sortedHead.companyFounded + "),"
                 sortedHead = sortedHead.next
 
         elif("company_found_descend" in request.form):
             sortedHead = mySll.sortCompanyFoundDescend(mySll.head)
-             #iterating through all the sorted node data to populate allCompanies variable.
+
+            #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
                 allCompanies += sortedHead.data + ","
-                allFounded += sortedHead.companyFounded + ","
+                extraContent += "(" + sortedHead.companyFounded + "),"
+                sortedHead = sortedHead.next
+
+        elif("country_produced_ascend" in request.form):
+            sortedHead = mySll.sortCountryDevelopedAscend(mySll.head)
+
+            #iterating through all the sorted node data to populate allCompanies variable.
+            while(sortedHead != None):
+                allCompanies += sortedHead.data + ","
+                extraContent += "(" + sortedHead.country + "),"
                 sortedHead = sortedHead.next
 
         elif("country_produced_descend" in request.form):
             return "country_produced_descend"
-
-        elif("country_produced_ascend" in request.form):
-            return "country_produced_ascend"
 
         elif("top_grossing_descend" in request.form):
             return "top_grossing_descend"
@@ -98,7 +105,7 @@ def home():
         elif("top_grossing_ascend" in request.form):
             return "top_grossing_ascend"
 
-        return redirect(url_for('sorted', allCompanies=allCompanies, allFounded=allFounded))
+        return redirect(url_for('sorted', allCompanies=allCompanies, extraContent=extraContent))
 
     if (request.method == 'GET'):
         while(mySll.head != None):
@@ -108,10 +115,11 @@ def home():
 
 #page for "sorting". String converter is specified to filter it from the URL. This page is mainly due to creating a new state. So, when the page is refreshed there will be no "confirm resubmission of form" dialog. 
 @app.route('/sorted/<string:allCompanies>/')
-@app.route('/sorted/<string:allCompanies>/<path:allFounded>/')
-def sorted(allCompanies, allFounded=None):
-    print(allFounded)
-    return render_template("game_company.html", allCompanies=allCompanies, allFounded=allFounded)
+@app.route('/sorted/<string:allCompanies>/<path:extraContent>/')
+@app.route('/sorted/<string:allCompanies>/<string:extraContent>/')
+def sorted(allCompanies, extraContent=None):
+    print(extraContent)
+    return render_template("game_company.html", allCompanies=allCompanies, extraContent=extraContent)
 
 #mojang
 @app.route('/mojang')

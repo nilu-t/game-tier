@@ -98,6 +98,29 @@ class sll:
         #return the merged left and right lists.
         return self.mergeCompanyFoundDescend(left,right)
 
+    def sortCountryDevelopedAscend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes by country developed name ascending in O(n*logn) time'''
+
+        #if the head is null or the head is one node, the head itself is returned.
+        if(head == None or head.next == None):
+            return head
+        
+        left = head #initially the left list is just the head
+        right = self.getMid(head) #initially the right list is just the middle node.
+        tempRight = right.next #the actual right node is the next node of the middle node.
+        right.next = None #since the right list aliased the head, the left list is now seperated.
+        right = tempRight #restoring the right list.
+
+        left = self.sortCountryDevelopedAscend(left) #recursively break down the left list and sort.
+        right = self.sortCountryDevelopedAscend(right) #recursively break down the right list and sort.
+
+        return self.mergeCountryDevelopedAscend(left,right) #returning the merge sorted list of left and right
+    
+    def sortCountryDevelopedDescend(self, head):
+        '''applying merge sort on the singly linked list to sort all the nodes by country developed name descending in O(n*logn) time'''
+        
+        pass
+
     def sortTopGrossingAscend(self, head):
         '''applying merge sort on the singly linked list to sort all the nodes by top grossing ascending in O(n*logn) time'''
 
@@ -119,10 +142,6 @@ class sll:
             #getting first strings from the left and right SLL lists.
             leftStr = (left.data)
             rightStr = (right.data)
-
-            #comparing both the leftStr and rightStr objects to be lowercase, regardless if they were initially uppercase.
-            leftStr =  leftStr.lower()
-            rightStr = rightStr.lower()
 
             #updating the tail SLL.
             if (leftStr >= rightStr):
@@ -156,9 +175,6 @@ class sll:
             
             leftData = left.data
             rightData = right.data
-
-            leftData = leftData.lower() #making the left data str to be lowercase.
-            rightData = rightData.lower() #making the right data str to be lowercase.
 
             if(leftData > rightData):
                 tail.next = left #the left node should appear before the right node if the left data is greater.
@@ -312,6 +328,41 @@ class sll:
             tail.next = right
 
         return tailCopy.next
+
+    def mergeCountryDevelopedAscend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (COUNTRY DEVELOPED ASCENDING)'''
+        tail = node() #tail copy used for populating the merge of the left and right lists.
+        tailCopy = tail #tailCopy aliases the tail. tailCopy points to the head of the tail.
+
+        while(left != None and right != None):
+            leftData = left.country
+            rightData = right.country
+
+            if(leftData > rightData):
+                #the left data is greater than right data, so right list comes before the left list to maintain ascending order.
+                tail.next = right
+                right = right.next
+            elif (leftData <= rightData):
+                #the left data is less than or equal to the right right data, so the left list comes before the right list to maintain ascending order.
+                tail.next = left
+                left = left.next
+            
+            tail = tail.next #iterating the tail node, so it is always pointing to its tail.
+        
+        if(left != None):
+            #it is possible the left list is not null after looping through both lists. So, the remaining left list is added to the tail.
+            tail.next = left
+
+        if(right != None):
+            #it is possible the right list is not null after looping through both lists. So, the remaining right list is added to the tail.
+            tail.next = right 
+
+        return tailCopy.next
+
+    def mergeCountryDevelopedDescend(self, left, right):
+        '''helper function for merging both left and right partitions of the list. (COUNTRY DEVELOPED DESCENDING)'''
+        
+        pass
 
     def mergeTopGrossingDescend(self, left, right):
         '''helper function for merging both left and right partitions of the list. (TOP GROSSING DESCENDING)'''
