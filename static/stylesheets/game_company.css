@@ -198,3 +198,12 @@ a[href="/Sonic Team"]{
 a[href="/LucasArts"]{
     background-image: linear-gradient(90deg,yellow, orange, black);
 }
+a[href="/Square Enix Holdings Co. Ltd"]{
+    background-image: linear-gradient(90deg,#e20a16, black);
+}
+a[href="/Zynga"]{
+    background-image: linear-gradient(90deg,#98061D, black);
+}
+a[href="/Rare"]{
+    background-image: linear-gradient(90deg,yellow,orange,darkorange, darkblue,blue);
+}

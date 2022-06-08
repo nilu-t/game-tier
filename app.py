@@ -6,7 +6,8 @@ app = Flask(__name__) #defining the Flask app.
 #home page.
 @app.route('/', methods=['GET','POST'])
 def home():
-    #creating the individual companies.
+
+    #creating the individual companies. The nodes are added in the "COMPANY_NAME", "DATE_FOUNDED", "COUNTRY DEVELOPED" format.
     mySll = sll()
     mySll.addFirst("Mojang", "05/2009", "Sweden")
     mySll.addFirst("Nintendo", "09/1889", "Japan")
@@ -41,6 +42,9 @@ def home():
     mySll.addFirst("id Software", "02/1991", "U.S")
     mySll.addFirst("BioWare", "02/1995", "Canada")
     mySll.addFirst("Nexon Co. Ltd", "12/1994", "South Korea")
+    mySll.addFirst("Square Enix Holdings Co. Ltd", "04/2003", "Japan")
+    mySll.addFirst("Zynga", "04/2007", "U.S")
+    mySll.addFirst("Rare", "NA/1985", "U.K")
 
     allCompanies = ""
     allFounded = ""
@@ -75,7 +79,12 @@ def home():
                 sortedHead = sortedHead.next
 
         elif("company_found_descend" in request.form):
-            return "company_found_descend"
+            sortedHead = mySll.sortCompanyFoundDescend(mySll.head)
+             #iterating through all the sorted node data to populate allCompanies variable.
+            while(sortedHead != None):
+                allCompanies += sortedHead.data + ","
+                allFounded += sortedHead.companyFounded + ","
+                sortedHead = sortedHead.next
 
         elif("country_produced_descend" in request.form):
             return "country_produced_descend"
