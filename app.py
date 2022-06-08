@@ -97,7 +97,13 @@ def home():
                 sortedHead = sortedHead.next
 
         elif("country_produced_descend" in request.form):
-            return "country_produced_descend"
+            sortedHead = mySll.sortCountryDevelopedDescend(mySll.head)
+
+            #iterating through all the sorted node data to populate allCompanies variable.
+            while(sortedHead != None):
+                allCompanies += sortedHead.data + ","
+                extraContent += "(" + sortedHead.country + "),"
+                sortedHead = sortedHead.next
 
         elif("top_grossing_descend" in request.form):
             return "top_grossing_descend"

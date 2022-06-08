@@ -119,7 +119,19 @@ class sll:
     def sortCountryDevelopedDescend(self, head):
         '''applying merge sort on the singly linked list to sort all the nodes by country developed name descending in O(n*logn) time'''
         
-        pass
+        #if the head is null or the head is one node, the head itself is returned.
+        if(head == None or head.next == None):
+            return head
+        
+        left = head #initially the left list is just the head
+        right = self.getMid(head) #initially the right list is just the middle node.
+        tempRight = right.next #the actual right node is the next node of the middle node.
+        right.next = None #since the right list aliased the head, the left list is now seperated.
+        right = tempRight #restoring the right list.
+
+        left = self.sortCountryDevelopedDescend(left) #recursively break down the left list and sort.
+        right = self.sortCountryDevelopedDescend(right) #recursively break down the right list and sort.
+        return self.mergeCountryDevelopedDescend(left,right) #returning the merge sorted list of left and right
 
     def sortTopGrossingAscend(self, head):
         '''applying merge sort on the singly linked list to sort all the nodes by top grossing ascending in O(n*logn) time'''
@@ -361,8 +373,33 @@ class sll:
 
     def mergeCountryDevelopedDescend(self, left, right):
         '''helper function for merging both left and right partitions of the list. (COUNTRY DEVELOPED DESCENDING)'''
+        tail = node() #tail copy used for populating the merge of the left and right lists.
+        tailCopy = tail #tailCopy aliases the tail. tailCopy points to the head of the tail.
+
+        while(left != None and right != None):
+            leftData = left.country
+            rightData = right.country
+
+            if(leftData > rightData):
+                #the left data is greater than right data, so left list comes before the right list to maintain descending order.
+                tail.next = left
+                left = left.next
+            elif (leftData <= rightData):
+                #the left data is less than or equal to the right right data, so the right list comes before the left list to maintain descending order.
+                tail.next = right
+                right = right.next
+            
+            tail = tail.next #iterating the tail node, so it is always pointing to its tail.
         
-        pass
+        if(left != None):
+            #it is possible the left list is not null after looping through both lists. So, the remaining left list is added to the tail.
+            tail.next = left
+
+        if(right != None):
+            #it is possible the right list is not null after looping through both lists. So, the remaining right list is added to the tail.
+            tail.next = right 
+
+        return tailCopy.next
 
     def mergeTopGrossingDescend(self, left, right):
         '''helper function for merging both left and right partitions of the list. (TOP GROSSING DESCENDING)'''
