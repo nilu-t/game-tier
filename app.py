@@ -53,7 +53,11 @@ def home():
 
         sortedHead = None
 
-        if("alpha_ascend" in request.form):
+        if("BioWare" in request.form):
+            #game company button was clicked. So redirecting the user to their selected game company page.
+            return redirect(url_for('BioWare'), gameCompany="BioWare")
+
+        elif("alpha_ascend" in request.form):
             sortedHead = mySll.sortAlphaAscend(mySll.head)
 
             #iterating through all the sorted node data to populate allCompanies variable.
@@ -124,78 +128,13 @@ def home():
 @app.route('/sorted/<string:allCompanies>/<path:extraContent>/')
 @app.route('/sorted/<string:allCompanies>/<string:extraContent>/')
 def sorted(allCompanies, extraContent=None):
-    print(extraContent)
     return render_template("game_company.html", allCompanies=allCompanies, extraContent=extraContent)
 
-#mojang
-@app.route('/mojang')
-def mojang():
-
-    #creating the individual game nodes for the mojang singly linked list.
-    mySll = sll()
-    mySll.addFirst("Minecraft")
-    mySll.addFirst("Minecraft Dungeons")
-    mySll.addFirst("Caller's Bane")
-    mySll.addFirst("Crown and Council")
-    mySll.addFirst("Minecraft: Story Mode")
-    mySll.addFirst("Minecraft: Pocket Edition")
-
-    allGames = ""
-    company = "Mojang"
-
-    while(mySll.head != None):
-        allGames += mySll.head.data + "\n"
-        mySll.head = mySll.head.next
-
-    return render_template("games.html", company=company, allGames=allGames)  
-
-#nintendo
-@app.route('/nintendo')
-def nintendo():
-
-    #creating the individual sub-game nodes for the nintendo singly linked list.
-    mySll = sll()
-    mySll.addFirst("Mario ")
-    mySll.addFirst("Pokemon")
-    mySll.addFirst("The legend of Zelda")
-
-    allGames = ""
-    company = "Nintendo"
-
-    while(mySll.head != None):
-        allGames += mySll.head.data + "\n"
-        mySll.head = mySll.head.next
-    return render_template("games.html", company=company, allGames=allGames)  
-
-#nintendo -> mario games.
-@app.route('/nintendo/mario')
-def nintendo_mario():
-    return "mario games"
-
-#nintendo -> pokemon games.
-@app.route('/nintendo/pokemon')
-def nintendo_pokemon():
-    return "pokemon games"
-
-#nintendo -> zelda games.
-@app.route('/nintendo/zelda')
-def nintendo_zelda():
-    return "The legend of Zelda games"
-
-#EA
-@app.route('/EA')
-def electronic_arts():
-    return "electronic arts (EA) tier list"
-
-#Activision Blizzard
-@app.route('/activision . blizzard')
-def activision_blizzard():
-    return "Activision Blizzard tier list"
-
-#Microsoft
-@app.route('/microsoft')
-def microsoft():
-    return "Microsoft tier list here"
+#In the game_company.js file, the href to the game company with the app route for "companyName" is made.
+#page displayed after the game company is clicked.
+@app.route('/<string:companyName>')
+def gameCompany(companyName=None):
+    return render_template("games.html", companyName=companyName)
 
 #User page to suggest a game to me.
 @app.route('/suggest_game')
