@@ -1,14 +1,18 @@
-from flask import Flask, render_template, request, redirect, url_for 
+from flask import Flask, render_template, request, redirect, url_for, abort
 from sll import sll #importing the sll class from the sll.py file within the same directory.
+import json
+import requests
+import unicodedata
+
 
 app = Flask(__name__) #defining the Flask app.
 
-#home page.
-@app.route('/', methods=['GET','POST'])
-def home():
+#sll object used for creating the individual companies. The nodes are added in the "COMPANY_NAME", "DATE_FOUNDED", "COUNTRY DEVELOPED" format.
+mySll = sll()
 
-    #creating the individual companies. The nodes are added in the "COMPANY_NAME", "DATE_FOUNDED", "COUNTRY DEVELOPED" format.
-    mySll = sll()
+#helper function to initialize all the game companies.
+def initializeCompanies():
+
     mySll.addFirst("Mojang", "05/2009", "Sweden")
     mySll.addFirst("Nintendo", "09/1889", "Japan")
     mySll.addFirst("Electronic Arts", "05/1982", "U.S")
@@ -45,6 +49,13 @@ def home():
     mySll.addFirst("Square Enix Holdings Co. Ltd", "04/2003", "Japan")
     mySll.addFirst("Zynga", "04/2007", "U.S")
     mySll.addFirst("Rare", "NA/1985", "U.K")
+    mySll.addFirst("Tencent", "11/1998", "China")
+
+#home page.
+@app.route('/', methods=['GET','POST'])
+def home():
+    if(mySll.getHead() == None):
+        initializeCompanies()
 
     allCompanies = ""
     extraContent = "" #stores additional content, such as dates founded, countries developed, etc. Each extra content will be wrapped in paranthesis.
@@ -53,12 +64,9 @@ def home():
 
         sortedHead = None
 
-        if("BioWare" in request.form):
-            #game company button was clicked. So redirecting the user to their selected game company page.
-            return redirect(url_for('BioWare'), gameCompany="BioWare")
-
-        elif("alpha_ascend" in request.form):
+        if("alpha_ascend" in request.form):
             sortedHead = mySll.sortAlphaAscend(mySll.head)
+            mySll.setHead(sortedHead) #The head of the SLL is now the sorted head.
 
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
@@ -67,6 +75,7 @@ def home():
 
         elif("alpha_descend" in request.form):
             sortedHead = mySll.sortAlphaDescend(mySll.head)
+            mySll.setHead(sortedHead)
 
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
@@ -75,6 +84,7 @@ def home():
     
         elif("company_found_ascend" in request.form):
             sortedHead = mySll.sortCompanyFoundAscend(mySll.head)
+            mySll.setHead(sortedHead)
 
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
@@ -84,6 +94,7 @@ def home():
 
         elif("company_found_descend" in request.form):
             sortedHead = mySll.sortCompanyFoundDescend(mySll.head)
+            mySll.setHead(sortedHead)
 
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
@@ -93,6 +104,7 @@ def home():
 
         elif("country_produced_ascend" in request.form):
             sortedHead = mySll.sortCountryDevelopedAscend(mySll.head)
+            mySll.setHead(sortedHead)
 
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
@@ -102,6 +114,7 @@ def home():
 
         elif("country_produced_descend" in request.form):
             sortedHead = mySll.sortCountryDevelopedDescend(mySll.head)
+            mySll.setHead(sortedHead)
 
             #iterating through all the sorted node data to populate allCompanies variable.
             while(sortedHead != None):
@@ -110,17 +123,18 @@ def home():
                 sortedHead = sortedHead.next
 
         elif("top_grossing_descend" in request.form):
-            return "top_grossing_descend"
+            return "EEEEE"
         
         elif("top_grossing_ascend" in request.form):
-            return "top_grossing_ascend"
+            return "EEEEE"
 
         return redirect(url_for('sorted', allCompanies=allCompanies, extraContent=extraContent))
 
     if (request.method == 'GET'):
-        while(mySll.head != None):
-            allCompanies += mySll.head.data + ","
-            mySll.head = mySll.head.next
+        sllHead = mySll.getHead()
+        while(sllHead != None):
+            allCompanies += sllHead.data + ","
+            sllHead = sllHead.next
         return render_template("game_company.html",  allCompanies=allCompanies)
 
 #page for "sorting". String converter is specified to filter it from the URL. This page is mainly due to creating a new state. So, when the page is refreshed there will be no "confirm resubmission of form" dialog. 
@@ -131,10 +145,39 @@ def sorted(allCompanies, extraContent=None):
     return render_template("game_company.html", allCompanies=allCompanies, extraContent=extraContent)
 
 #In the game_company.js file, the href to the game company with the app route for "companyName" is made.
-#page displayed after the game company is clicked.
-@app.route('/<string:companyName>')
+#this routes' page is displayed after the game company is clicked.
+@app.route('/<string:companyName>', methods=['GET','POST'])
 def gameCompany(companyName=None):
-    return render_template("games.html", companyName=companyName)
+
+    tempSLL = mySll
+    tempHead = tempSLL.getHead()
+
+    companyFound = False
+
+    while(tempHead != None ):
+        if(companyName != tempHead.data):
+            tempHead = tempHead.next 
+            continue #skip to next iteration, the company name is not found.
+        elif(companyName == tempHead.data):
+            companyFound = True
+            break #break out the loop the company is found
+
+    
+    if(companyFound):
+        print(companyName)
+
+        allGames = None
+
+        if(companyName == "Electronic Arts"):
+            allGames = requests.get('http://127.0.0.1:3000/ea2000to2009').text
+        
+        if(allGames == None):
+            allGames = "Unfortunately, Game-Tier does not have any information for this company :(" #will be the default text if no games are found for the company.
+
+        return render_template("games.html", companyName=companyName, allGames=allGames)
+    
+    else:
+        return abort(404, description="It seems you are trying to access a page which is not a current game company.\nIf you feel something is missing that should be here, contact me.")
 
 #User page to suggest a game to me.
 @app.route('/suggest_game')

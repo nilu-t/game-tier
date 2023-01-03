@@ -6,6 +6,12 @@ class sll:
         '''constructor for the singly linked list.'''
         self.head = head
 
+    def getHead(self):
+        return self.head
+    
+    def setHead(self, head = None):
+        self.head = head
+
     def addFirst(self, data, companyFounded=None, country=None):
         '''this function adds a node to the front of the linked list.'''
         self.head = node(data, companyFounded, country, self.head) #adding the node to the front of the sll. 
