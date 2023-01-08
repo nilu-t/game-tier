@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, abort
 from sll import sll #importing the sll class from the sll.py file within the same directory.
 import json
 import requests
-import unicodedata
 
 
 app = Flask(__name__) #defining the Flask app.
@@ -25,7 +24,7 @@ def initializeCompanies():
     mySll.addFirst("Sony", "05/1946", "Japan")
     mySll.addFirst("Valve Corporation","08/1996", "U.S")
     mySll.addFirst("Sega Games Co. Ltd", "06/1960", "Japan")
-    mySll.addFirst("Naughty Dog Inc", "09/1984", "U.S")
+    mySll.addFirst("Naughty Dog", "09/1984", "U.S")
     mySll.addFirst("Infinity Ward", "NA/2002", "U.S")
     mySll.addFirst("Take-Two Interactive Software Inc", "09/1993", "U.S")
     mySll.addFirst("Gameloft", "12/1999", "France")
@@ -161,25 +160,29 @@ def gameCompany(companyName=None):
         elif(companyName == tempHead.data):
             companyFound = True
             break #break out the loop the company is found
-
     
     if(companyFound):
         print(companyName)
 
-        allGames = None
-
-        if(companyName == "Electronic Arts"):
-            allGames = requests.get('http://127.0.0.1:3000/ea2000to2009').text
-        
-        if(allGames == None):
-            allGames = "Unfortunately, Game-Tier does not have any information for this company :(" #will be the default text if no games are found for the company.
-
+        allGames = requests.get('http://127.0.0.1:3000/'+companyName).text
+    
         return render_template("games.html", companyName=companyName, allGames=allGames)
     
     else:
         return abort(404, description="It seems you are trying to access a page which is not a current game company.\nIf you feel something is missing that should be here, contact me.")
 
-#User page to suggest a game to me.
+#page to suggest a game to me.
 @app.route('/suggest_game')
 def suggestion():
     return "Have a suggestion for a game or game company not listed here ? <br> Feel free to reach out to me."
+
+#page for a "wishlist" feature that allows users to save games they are interested in purchasing or playing in the future.
+@app.route('/wish_list')
+def wish_list():
+    return "your wish list of favourite games you are interested in purchasing/playing in the future"
+
+#page for a "trending" section which displays the most popular games in the industry as a whole.
+@app.route('/trending_list')
+def trending():
+    return "your trending list of most popular games from all popular game companies available on Game-Tier"
+

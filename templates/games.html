@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/games.css') }}">
-    <script src=" {{ url_for('static', filename='scripts/games.js') }}" defer></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/games.css') }}">
+  <script src=" {{ url_for('static', filename='scripts/games.js') }}" defer></script>
 </head>
-
 <body>
-    <h1>{{ companyName }}</h1>
-    <div class="game_content">{{ allGames }}</div>
+    <div class="flex_container">
+        <h1 class="company_title">{{ companyName }}</h1>
+        {% if allGames != None %}
+        <div class="company_games">
+            <br>
+            <form class="query_dropdown">
+                <label for="query"> Query video games from {{ companyName }} by </label>
+                <select class="query_dropdown_options" name="query">
+                    <option>year</option>
+                    <option>title</option>
+                    <option>release date</option>
+                    <option>platform</option>
+                    <option>developer</option>
+                </select>
+                <button type="submit">Run</button>
+            </form>
+            <br>
+            All the video games from {{ companyName }}
+            <br><br>
+            <div id="all_games">{{ allGames }}</div>
+        </div>
+        {% elif allGames == None %}
+        Unfortunately, Game-Tier does not have any information for this company :(
+        {% endif %}
+        <div class="table_container"></div>
+    </div>
 </body>
